@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script>
+			function check_Color_Range(value) {
+				if (value >= 0 && value <= 255) return true;
+				
+				alert("One of the color channels is not between the values 0 and 255");
+				return false;
+			}
+			
+			function check_All_Values(red, green, blue) {
+				return check_Color_Range(red) && check_Color_Range(green) && check_Color_Range(blue);
+			}
+			
+			function set_Border(red, green, blue, width) {
+				if (!check_All_Values(red, green, blue)) return;
+				var color_String = "rgb(" + red.toString() + "," + green.toString() + "," + blue.toString() + ")"; 
+				
+				document.getElementById("paragraph").style.borderWidth = width + "px";
+				document.getElementById("paragraph").style.borderColor = color_String;
+				
+				return;
+			}
+			
+			function set_Paragraph(red, green, blue) {
+				if (!check_All_Values(red, green, blue)) return;
+				
+				var color_String = "rgb(" + red.toString() + "," + green.toString() + "," + blue.toString() + ")";
+				document.getElementById("paragraph").style.color = color_String;
+			}
+			
+			function modify_Paragraph_And_Border() {
+				set_Border(document.getElementById("red_Border").value, document.getElementById("green_Border").value, document.getElementById("blue_Border").value, document.getElementById("width_Border").value);
+				set_Paragraph(document.getElementById("red_Font").value, document.getElementById("green_Font").value, document.getElementById("blue_Font").value);
+			}
+		</script>
+	</head>
+		
+	<body>
+		<h1 style="color: rgb(0,0,255);">FONT AND BORDER COLOR CONTROL</h1>
+		<p id="paragraph" style='border-style: solid; border-width: 2px;'>There is some fiction in your truth, and some truth in your fiction.</p>
+		<label for="red_Font" >Font Color:</label><br/>
+		<input id="red_Font" type="number" value="0"><br/>
+		<input id="green_Font" type="number" value="0"><br/>
+		<input id="blue_Font" type="number" value="0"><br/>
+		
+		<label for="red_Border">Border Color:</label><br/>
+		<input id="red_Border" type="number" value="0"><br/>
+		<input id="green_Border" type="number" value="0"><br/>
+		<input id="blue_Border" type="number" value="0"><br/>
+		
+		<label for="width_Border">Border Width:</label><br/>
+		<input id="width_Border" type="number" value="0"><br/>
+		
+		<button type="button" onclick="modify_Paragraph_And_Border()">Modify</button>
+	</body>
+</html>
